@@ -36,6 +36,7 @@ class transcriptionqueue extends Command
         $outputPrefix = "../storage/app/private/output/";
         $stateUploaded = TranscriptionState::FirstOrFail("name", "uploaded")->first();
         $stateQueued = TranscriptionState::FirstOrFail("name", "queued")->first();
+        $stateDone = TranscriptionState::FirstOrFail("name", "done")->first();
         // Hochgeladene Transcriptionen laden
         $transcriptions = Transcription::where("transcription_state_id", $stateUploaded->id)->get();
         // Dateien ausspielen in Übergabe-Stagingverzeichnis
@@ -56,8 +57,21 @@ class transcriptionqueue extends Command
         //Eingabe-Verzeichnis laden
         if(!Storage::exists('input')) Storage::makeDirectory('input');
         $inputFiles = Storage::files('input');
-        //Dateien (.zip) den Jobs zuordnen
-        //Mail mit Downloadlink versenden
+        foreach($inputFiles as $inputFile) {
+            $filename = basename($inputFile);
+            $basename = basename($inputFile, '.zip');
+            //Dateien (.zip) den Jobs zuordnen
+            $transcription = Transcription::where("attachment", "$basename.mp3")->first();
+            if($transcription != null) {
+                $destination = $filenamePrefix.$filename;
+                File::move($inputFile, $destination);
+
+                $transcription->transcription_state_id = $stateDone->id;
+                $transcription->save();
+                //Mail mit Downloadlink versenden
+
+            }
+        }
 
     }
 }
