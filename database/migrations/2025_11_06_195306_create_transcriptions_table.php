@@ -18,6 +18,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string("description");
             $table->string("attachment")->nullable();
+            $table->string("attachment_filename")->nullable();
+            $table->string("transcription")->nullable();
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(TranscriptionState::class);
             $table->datetime("upload_time")->nullable();

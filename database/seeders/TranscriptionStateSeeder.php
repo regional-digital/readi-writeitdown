@@ -22,10 +22,6 @@ class TranscriptionStateSeeder extends Seeder
             'title' => 'geplant'
         ]);
         DB::table('transcription_states')->insert([
-            'name' => 'running',
-            'title' => 'läuft'
-        ]);
-        DB::table('transcription_states')->insert([
             'name' => 'done',
             'title' => 'erledigt'
         ]);

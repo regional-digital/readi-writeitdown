@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Filament\Resources\TranscriptionResource\Pages;
+namespace App\Filament\Resources\Transcriptions\Pages;
 
-use App\Filament\Resources\TranscriptionResource;
-use Filament\Actions;
+use App\Filament\Resources\Transcriptions\TranscriptionResource;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListTranscriptions extends ListRecords
@@ -13,7 +13,7 @@ class ListTranscriptions extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

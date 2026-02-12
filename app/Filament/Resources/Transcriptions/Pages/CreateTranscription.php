@@ -1,13 +1,10 @@
 <?php
 
-namespace App\Filament\Resources\TranscriptionResource\Pages;
-use Illuminate\Support\Facades\Auth;
+namespace App\Filament\Resources\Transcriptions\Pages;
 
-use App\Filament\Resources\TranscriptionResource;
+use App\Filament\Resources\Transcriptions\TranscriptionResource;
 use App\Models\TranscriptionState;
 use Carbon\Carbon;
-use DateTime;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateTranscription extends CreateRecord
